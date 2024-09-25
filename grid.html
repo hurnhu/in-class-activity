@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- This declares the document type as HTML5 and specifies the language as English -->
+  <meta charset="UTF-8">
+  <!-- Defines the character encoding (UTF-8) to handle various characters -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Sets the viewport for responsive design, ensuring the page is properly scaled on mobile devices -->
+  <title>Responsive 3x3 Grid with CSS Layouts</title>
+  <!-- The title of the page that appears on the browser tab -->
+
+  <style>
+    /* The grid container that holds all the cards */
+    .grid-container {
+      display: grid;
+      /* Enables CSS Grid layout, which divides the container into rows and columns */
+      grid-template-columns: repeat(3, minmax(200px, 1fr));
+      /* 
+        Creates 3 equal columns.
+        repeat(3, ...) means repeat the column definition 3 times.
+        minmax(200px, 1fr) means each column is at least 200px wide, but can grow to take up available space (1fr = 1 fraction of available space).
+      */
+      gap: 20px;
+      /* Adds 20px space between the grid items (the cards) */
+      padding: 20px;
+      /* Adds 20px of space inside the grid container (between the edges of the container and its contents) */
+    }
+
+    /* Each card in the grid */
+    .card {
+      height: 100%;
+      /* Ensures that the card takes up the full height available */
+      box-sizing: border-box;
+      /* 
+        Makes sure padding and borders are included in the width and height calculation,
+        preventing the card from overflowing its grid cell.
+      */
+    }
+
+    /* General card styles */
+    .card {
+      background-color: lightgray;
+      /* Sets the background color of the card to light gray */
+      border-radius: 10px;
+      /* Rounds the corners of the card with a 10px radius */
+      padding: 20px;
+      /* Adds 20px padding inside the card (space between the content and the card edges) */
+      overflow: hidden;
+      /* Prevents content from overflowing outside the card if it exceeds the card size */
+    }
+
+    /* Hide the content inside the cards initially */
+    .card-content {
+      transition: all 1s ease;
+      /* Adds a smooth transition of 1 second when the content's visibility changes */
+      opacity: 0;
+      /* Sets the content's opacity to 0, effectively hiding it */
+    }
+
+    /* Show the content when the card is hovered over */
+    .card:hover .card-content {
+      opacity: 1;
+      /* On hover, the content becomes fully visible with an opacity of 1 */
+    }
+
+    /* Specific styles for the 4th card, selected by its unique ID */
+    #card4 {
+      background-color: red;
+      /* Sets the background color of the 4th card to red */
+    }
+
+    /* 
+      Below are different layouts for the card content using various CSS techniques.
+      Each card has a different way of organizing its content.
+    */
+
+    /* Card 1 - using a basic block layout (default) */
+    #card1 .card-content {
+      display: block;
+      /* The default layout is block, where content is stacked vertically */
+    }
+
+    /* Card 2 - using a grid layout */
+    #card2 .card-content {
+      display: grid;
+      /* Enables grid layout for the content */
+      grid-template-columns: 1fr 1fr;
+      /* Defines 2 equal-width columns inside the card */
+      gap: 10px;
+      /* Adds 10px of space between the grid items (the content inside the card) */
+    }
+
+    /* Card 3 - using float layout */
+    #card3 .card-content div {
+      float: left;
+      /* Floats each div inside the card to the left */
+      width: 50%;
+      /* Each div takes up 50% of the width, making them sit side-by-side */
+    }
+
+    /* Card 4 - using flexbox layout */
+    #card4 .card-content {
+      display: flex;
+      /* Enables flexbox layout for the content */
+      justify-content: space-around;
+      /* Distributes space evenly between the flex items, placing them with space around them */
+    }
+
+    /* Card 5 - using inline-block layout */
+    #card5 .card-content div {
+      display: inline-block;
+      /* Treats each div as inline-block, meaning they behave like inline elements but respect width and height */
+      margin-right: 10px;
+      /* Adds 10px of space to the right of each inline-block element */
+    }
+
+    /* Card 6 - center-aligns text using an attribute selector */
+    [data-type="text"] {
+      text-align: center;
+      /* Centers the text inside elements that have the attribute 'data-type="text"' */
+    }
+
+    /* Card 7 - using flexbox with column direction */
+    #card7 .card-content {
+      display: flex;
+      /* Enables flexbox layout */
+      flex-direction: column;
+      /* Arranges flex items (content) in a column */
+      gap: 10px;
+      /* Adds 10px of space between the flex items */
+      align-items: center;
+      /* center the contents */
+    }
+
+    /* Card 9 - random margin between items */
+    #card9 .card-content div {
+      margin: 20px 30px
+      /* Adds 5px of space below each div inside the card */
+    }
+
+    /* Media queries for responsive design */
+    
+    /* Media query for medium screens (max-width: 768px) */
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* Changes the grid to 2 columns on screens with a width of 768px or less */
+      }
+    }
+
+    /* Media query for small screens (max-width: 480px) */
+    @media (max-width: 480px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+        /* Changes the grid to 1 column on screens with a width of 480px or less */
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- The grid container holding all the cards -->
+  <div class="grid-container">
+    <!-- Each div with the class 'card' represents a grid item (a card) -->
+    <div class="card" id="card1">
+      <div class="card-content">
+        <!-- Content inside the card -->
+        <p>This is Card 1 (Box Layout)</p>
+      </div>
+    </div>
+
+    <div class="card" id="card2">
+      <div class="card-content">
+        <div>grid 1</div>
+        <div>grid 2</div>
+        <!-- Card content displayed in a grid (two columns) -->
+      </div>
+    </div>
+
+    <div class="card" id="card3">
+      <div class="card-content">
+        <div>Float 1</div>
+        <div>Float 2</div>
+        <!-- Card content displayed using float (two side-by-side divs) -->
+      </div>
+    </div>
+
+    <div class="card" id="card4">
+      <div class="card-content">
+        <div>flex spaced evenly 1</div>
+        <div>flex spaced evenly 2</div>
+        <div>flex spaced evenly 3</div>
+        <!-- Card content displayed using flexbox layout (items spaced evenly) -->
+      </div>
+    </div>
+
+    <div class="card" id="card5">
+      <div class="card-content">
+        <div>inline-block 1</div>
+        <div>inline-block 2</div>
+        <!-- Content displayed inline-block (side-by-side with space in between) -->
+      </div>
+    </div>
+
+    <div class="card" id="card6" data-type="text">
+      <div class="card-content">
+        <p>Centered Text</p>
+        <!-- Card with centered text using an attribute selector -->
+      </div>
+    </div>
+
+    <div class="card" id="card7">
+      <div class="card-content">
+        <div>flex Column 1</div>
+        <div>flex Column 2</div>
+        <div>flex Column 3</div>
+        <!-- Content displayed in flexbox column layout -->
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-content">
+        <table>
+          <thead>
+            <th>column one</th>
+            <th colspan="2">column two</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td> item 1</td>
+              <td> item 2</td>
+              <td> item 3</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Content displayed in table layout -->
+      </div>
+    </div>
+
+    <div class="card" id="card9">
+      <div class="card-content">
+        <div>Random margin Item 1</div>
+        <div>Random margin Item 2</div>
+        <!-- Content displayed with random margins between items -->
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
