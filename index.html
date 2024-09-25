@@ -4,9 +4,8 @@
 <head>
     <style>
         /*
-        border-box tells the browser to account for any border and padding in the values you specify for an element's width and height.
-         If you set an element's width to 100 pixels, that 100 pixels will include any border or padding you added, 
-         and the content box will shrink to absorb that extra width. This typically makes it much easier to size elements. 
+        box-sizing: border-box ensures padding and borders are included within the element’s width and height. 
+        Without this, padding and borders are added to the size, which can cause layout issues.
         */
         * {
             box-sizing: border-box;
@@ -14,152 +13,160 @@
 
         /* Style the body */
         body {
-            font-family: Arial;
-            margin: 0;
+            font-family: Arial; /* Sets the font for the whole page to Arial */
+            margin: 0; /* Removes default margins from the body */
         }
 
+        /* Styles the navigation bar (ul is unordered list) */
         ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #333;
-            position: -webkit-sticky;
-            /* Safari */
-            position: sticky;
-            top: 0;
+            list-style-type: none; /* Removes bullet points from list items */
+            margin: 0; /* Removes margin from ul */
+            padding: 0; /* Removes padding from ul */
+            overflow: hidden; /* Ensures list items don't overflow the container */
+            background-color: #333; /* Dark background color */
+            position: -webkit-sticky; /* Sticks the nav bar to the top in Safari */
+            position: sticky; /* Sticks the nav bar to the top */
+            top: 0; /* Sticks it at the top of the screen */
         }
 
+        /* List items inside the ul (menu links) */
         li {
-            float: left;
+            float: left; /* Aligns menu items horizontally */
         }
 
+        /* Links inside list items */
         li a {
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
+            display: block; /* Makes the link behave like a block, so it fills the li */
+            color: white; /* Sets the link text color to white */
+            text-align: center; /* Centers the link text */
+            padding: 14px 16px; /* Adds space inside the link */
+            text-decoration: none; /* Removes underline from the link */
         }
 
+        /* Changes background color of links when hovered over */
         li a:hover {
-            background-color: #111;
+            background-color: #111; /* Darker background on hover */
         }
 
+        /* Styles the active link (home link) */
         .active {
-            background-color: #4CAF50;
+            background-color: #4CAF50; /* Green background for the active link */
         }
 
-        /* Set the background color of body to tan */
+        /* Sets the background color of the body */
         body {
-            background-color: tan;
+            background-color: tan; /* Sets background of the page to tan */
         }
 
+        /* Class for elements only visible on small screens */
         .vis-small {
-            display: none;
+            display: none; /* Hides this element by default */
         }
 
-
-        /* Header/logo Title */
+        /* Header section styling */
         .header {
-            padding: 60px;
-            text-align: center;
-            background: #1abc9c;
-            color: white;
+            padding: 60px; /* Adds space inside the header */
+            text-align: center; /* Centers the text */
+            background: #1abc9c; /* Sets the background color */
+            color: white; /* Sets the text color to white */
         }
 
-        /* Column container */
+        /* Container for columns (flexbox layout) */
         .row {
-            display: flex;
-            flex-wrap: wrap;
+            display: flex; /* Uses flexbox for layout */
+            flex-wrap: wrap; /* Wraps columns when there isn't enough space */
         }
 
-        /* Create two unequal columns that sits next to each other */
-        /* Sidebar/left column */
+        /* Sidebar column (30% width) */
         .side {
-            flex: 30%;
-            background-color: #f1f1f1;
-            padding: 20px;
+            flex: 30%; /* Takes up 30% of the available space */
+            background-color: #f1f1f1; /* Light grey background */
+            padding: 20px; /* Adds space inside the column */
         }
 
-        /* Main column */
+        /* Main content column (70% width) */
         .main {
-            flex: 70%;
-            background-color: white;
-            padding: 20px;
+            flex: 70%; /* Takes up 70% of the available space */
+            background-color: white; /* White background */
+            padding: 20px; /* Adds space inside the column */
         }
 
-        /* Fake image, just for this example */
+        /* Fake image placeholder styling */
         .fakeimg {
-            background-color: #aaa;
-            width: 100%;
-            padding: 20px;
+            background-color: #aaa; /* Light grey background for the fake image */
+            width: 100%; /* Makes the fake image take up full width */
+            padding: 20px; /* Adds space inside the fake image */
         }
 
+        /* Floating Action Button (FAB) styling */
         .fab {
-            width: 50px;
-            height: 50px;
-            border-radius: 30px;
-            border-style: none;
-            position: fixed;
-            left: 95%;
-            top: 90%;
-            color: white;
-            font-size: 35px;
-            background-image: conic-gradient(red 0deg, red 90deg, yellow 90deg, yellow 180deg, green 180deg, green 270deg, blue 270deg);
+            width: 50px; /* Button width */
+            height: 50px; /* Button height */
+            border-radius: 30px; /* Makes the button round */
+            border-style: none; /* Removes border */
+            position: fixed; /* Fixes the position to the screen */
+            left: 95%; /* Places button near the right edge */
+            top: 90%; /* Places button near the bottom */
+            color: white; /* Text color inside the button */
+            font-size: 35px; /* Font size inside the button */
+            background-image: conic-gradient(
+                red 0deg, red 90deg, yellow 90deg, yellow 180deg, green 180deg, green 270deg, blue 270deg
+            ); /* Creates a multi-color gradient */
         }
 
-
+        /* Profile box with hover animation */
         .prof {
-            width: 100px;
-            height: 100px;
-            background: red;
-            transition: width 2s, height 4s;
+            width: 100px; /* Initial width */
+            height: 100px; /* Initial height */
+            background: red; /* Red background */
+            transition: width 2s, height 4s; /* Animates width and height changes */
         }
 
         .prof:hover {
-            width: 300px;
-            height: 300px;
+            width: 300px; /* Expands width on hover */
+            height: 300px; /* Expands height on hover */
         }
 
-
+        /* Tooltip styling */
         .secret {
             position: relative;
             display: inline-block;
-            border-bottom: 1px dotted black;
+            border-bottom: 1px dotted black; /* Dotted underline */
         }
 
+        /* Hidden tooltip text */
         .secret .secrettext {
-            visibility: hidden;
-            width: 120px;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-
-            /* Position the secret */
-            position: absolute;
-            z-index: 1;
+            visibility: hidden; /* Hides the tooltip by default */
+            width: 120px; /* Width of the tooltip box */
+            background-color: black; /* Tooltip background */
+            color: #fff; /* Text color */
+            text-align: center; /* Centered text */
+            border-radius: 6px; /* Rounded corners */
+            padding: 5px 0; /* Adds vertical padding */
+            position: absolute; /* Positions relative to parent */
+            z-index: 1; /* Ensures tooltip appears above other elements */
         }
 
+        /* Show tooltip on hover */
         .secret:hover .secrettext {
-            visibility: visible;
+            visibility: visible; /* Displays the tooltip */
         }
 
+        /* Red cube that animates */
         .cube {
-            width: 100px;
-            height: 100px;
-            background-color: red;
+            width: 100px; /* Cube width */
+            height: 100px; /* Cube height */
+            background-color: red; /* Initial background color */
             position: relative;
-            animation-name: example;
-            animation-duration: 5s;
-            animation-timing-function: linear;
-            animation-delay: 2s;
-            animation-iteration-count: infinite;
-            animation-direction: alternate;
+            animation-name: example; /* Name of the animation */
+            animation-duration: 5s; /* Duration of each animation cycle */
+            animation-timing-function: linear; /* Smooth movement */
+            animation-delay: 2s; /* Wait 2 seconds before starting */
+            animation-iteration-count: infinite; /* Repeat the animation infinitely */
+            animation-direction: alternate; /* Reverse direction after each cycle */
         }
 
+        /* Keyframe animation for the cube */
         @keyframes example {
             0% {
                 background-color: red;
@@ -192,26 +199,25 @@
             }
         }
 
-        /* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+        /* Responsive layout: stack columns on small screens */
         @media screen and (max-width: 700px) {
-
             .row {
-                flex-direction: column;
+                flex-direction: column; /* Stacks columns vertically */
             }
         }
 
-        /* On screens that are 992px or less, set the background color to blue */
+        /* Screen width 992px or less: background color and visibility changes */
         @media screen and (max-width: 992px) {
             .vis-small {
-                display: block;
+                display: block; /* Shows the small screen element */
             }
 
             .vis-large {
-                display: none;
+                display: none; /* Hides the large screen element */
             }
 
             body {
-                background-color: blue;
+                background-color: blue; /* Changes background to blue */
             }
         }
     </style>
@@ -224,22 +230,27 @@
         <p>Scroll down to see the sticky effect.</p>
     </div>
 
+    <!-- Navigation bar -->
     <ul>
         <li><a class="active" href="#home">Home</a></li>
         <li><a href="#news">News</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
 
+    <!-- Heading for small and large screen visibility -->
     <h1 class="vis-small">You can only see me on small screens!</h1>
     <h1 class="vis-large">You can only see me on large screens!</h1>
-    <!-- The flexible grid (content) -->
+
+    <!-- Main layout: two-column grid (sidebar + content) -->
     <div class="row">
         <div class="side">
             <h2>About Me</h2>
+            <!-- Tooltip with secret text -->
             <div class="secret">I have a secret...
                 <span class="secrettext">Cheese is good</span>
             </div>
             <h5>Photo of me:</h5>
+            <!-- Hover-to-grow image box -->
             <div class="fakeimg prof">Image</div>
             <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
             <h3>More Text</h3>
@@ -248,27 +259,27 @@
             <div class="fakeimg" style="height:60px;">Image</div><br>
             <div class="fakeimg" style="height:60px;">Image</div>
         </div>
+        <!-- Main content section -->
         <div class="main">
             <h2>TITLE HEADING</h2>
             <h5>Title description, Dec 7, 2017</h5>
             <div class="fakeimg" style="height:200px;">Image</div>
             <p>Some text..</p>
-            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco.</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit...</p>
             <br>
             <h2>TITLE HEADING</h2>
             <h5>Title description, Sep 2, 2017</h5>
             <div class="fakeimg" style="height:200px;">Image</div>
             <p>Some text..</p>
-            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco.</p>
+            <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit...</p>
         </div>
+        <!-- Animated cube -->
         <div class="cube"></div>
     </div>
-    <!-- FAB -->
+
+    <!-- Floating Action Button -->
     <button class="fab">?</button>
+
 </body>
 
 </html>
